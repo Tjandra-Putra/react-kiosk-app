@@ -1,0 +1,16 @@
+.input-search,
+.btn {
+	border: none !important;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.navbar {
+	padding: 0 !important;
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+	.input-search {
+		width: 100% !important;
+	}
+}
