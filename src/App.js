@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import Products from './components/Products/Products';
+import SideDrawer from './components/SideDrawer/SideDrawer';
+import Backdrop from './components/Backdrop/Backdrop';
 import './App.css';
 
 class App extends Component {
@@ -67,9 +69,11 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div className="App" style={{ height: '100%' }}>
 				<BrowserRouter>
 					<Navbar />
+					{/* <SideDrawer />
+					<Backdrop /> */}
 					<Products products={this.products} />
 				</BrowserRouter>
 			</div>

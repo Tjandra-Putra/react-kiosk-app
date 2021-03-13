@@ -4,6 +4,11 @@
 	font-family: 'Poppins', sans-serif;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	padding: 2em;
+	height: 100%;
 }

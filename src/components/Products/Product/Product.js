@@ -38,31 +38,18 @@ const product = (props) => {
 
 				<Modal.Body className="mt-3 p-0">$ {props.product.prod_description}</Modal.Body>
 
-				{/* <div className="d-flex justify-content-center">
-					<div className="p-2 bd-highlight">
-						<Button variant="secondary" size="sm" onClick={() => props.decreaseQuantity(props.product)}>
-							-
-						</Button>
-					</div>
-					<div className="p-2 bd-highlight">{props.data.map((item) => <p>{item.prod_quantity}</p>)}</div>
-					<div className="p-2 bd-highlight">
-						<Button variant="secondary" size="sm" onClick={() => props.increaseQuantity(props.product)}>
-							+
-						</Button>
-					</div>
-				</div> */}
 				<Modal.Footer className="border-0">
-					<Button variant="primary mb-3 mt-3" onClick={() => props.addToCart(props.product)} block>
+					<Button
+						variant="primary mb-3 mt-3"
+						onClick={() => {
+							props.addToCart(props.product);
+							handleClose();
+						}}
+						block
+					>
 						Add to Cart
 					</Button>
 				</Modal.Footer>
-				<ul>
-					{props.data.map((item) => (
-						<li>
-							{item.prod_name}, {item.prod_quantity}
-						</li>
-					))}
-				</ul>
 			</Modal>
 		</React.Fragment>
 	);

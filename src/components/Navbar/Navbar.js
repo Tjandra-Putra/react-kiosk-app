@@ -1,11 +1,28 @@
-import React from 'react';
-import './Navbar.css';
-
+import React, { useState } from 'react';
 import { Navbar, Button, Form, Nav, FormControl, Badge } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions';
+
+import './Navbar.css';
+import SideDrawer from '../SideDrawer/SideDrawer';
+import Backdrop from '../Backdrop/Backdrop';
 
 const navbar = (props) => {
+	const [ sideDrawerOpen, setSideDrawer ] = useState(false);
+
+	const drawerToggleClickHandler = () => {
+		setSideDrawer(!sideDrawerOpen);
+	};
+
+	const backdropClickHandler = () => {
+		setSideDrawer(false);
+	};
+
+	let backdrop;
+
+	if (sideDrawerOpen) {
+		backdrop = <Backdrop click={backdropClickHandler} />;
+	}
+
 	return (
 		<React.Fragment>
 			<Navbar variant="light" className="navbar">
@@ -16,7 +33,7 @@ const navbar = (props) => {
 					<Button variant="light" className="d-inline ml-3 btn">
 						Call Waiters
 					</Button>
-					<Button variant="light" className="d-inline ml-3 btn">
+					<Button variant="light" className="d-inline ml-3 btn" onClick={drawerToggleClickHandler}>
 						Orders
 						<Badge variant="primary" className="ml-2">
 							{props.data.length}
@@ -24,6 +41,8 @@ const navbar = (props) => {
 					</Button>
 				</Nav>
 			</Navbar>
+			<SideDrawer show={sideDrawerOpen} />
+			{backdrop}
 		</React.Fragment>
 	);
 };

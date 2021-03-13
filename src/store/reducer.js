@@ -79,8 +79,14 @@ const reducer = (state = initialState, action) => {
 
 			itemObj.prod_quantity -= 1;
 
-			if (itemObj.prod_quantity < 0) {
-				itemObj.prod_quantity = 0;
+			// If quantity is zero, remove item from cart
+			if (itemObj.prod_quantity === 0) {
+				const itemArray = [ ...state.selectedItems ];
+				itemArray.splice(itemIndex, 1);
+				return {
+					...state,
+					selectedItems: itemArray
+				};
 			}
 
 			const itemArray = [ ...state.selectedItems ];
@@ -89,6 +95,13 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				selectedItems: itemArray
+			};
+		}
+
+		case actionTypes.CALCULATE_TOTAL_PRICE: {
+			return {
+				...state,
+				totalPrice: action.total_price
 			};
 		}
 	}
