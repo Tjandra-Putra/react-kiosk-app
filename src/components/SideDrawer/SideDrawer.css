@@ -18,13 +18,16 @@
 
 .summary {
 	bottom: 0;
+	left: 15px;
+	right: 15px;
 	position: fixed;
 	margin-bottom: 1rem;
 }
 
 .btn-order {
-	width: 100%;
-	padding: 0.2rem 8.1rem;
+	/* width: 100%;
+	padding: 0.2rem 8.1rem; */
+	/* margin: unset 3rem; */
 }
 
 .cart-items {
