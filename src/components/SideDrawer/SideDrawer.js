@@ -32,8 +32,8 @@ const sideDrawer = (props) => {
 
 	if (props.data.length > 0) {
 		orders = (
-			<React.Fragment>
-				<Table borderless hover>
+			<div className="cart-items">
+				<Table borderless hover className="table-responsive-sm">
 					<tbody>
 						{props.data.map((item, index) => (
 							<tr>
@@ -84,7 +84,7 @@ const sideDrawer = (props) => {
 						Order Now
 					</Button>
 				</div>
-			</React.Fragment>
+			</div>
 		);
 	}
 
@@ -102,9 +102,7 @@ const sideDrawer = (props) => {
 							</Badge>
 						</div>
 					</div>
-
 					<hr />
-
 					{orders}
 				</div>
 			</Container>
