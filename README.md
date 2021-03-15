@@ -30,7 +30,7 @@ react-kiosk-app > Server | http://localhost:3001/
 > node index.js
 ```
 
-react-kiosk-app > Server #Nodemon 
+react-kiosk-app > Server | Nodemon 
 ```sh
 > npm run devStart
 ```
