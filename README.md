@@ -20,17 +20,17 @@ Installing dependencies
 ```
 
 ### Running the application
-Client | http://localhost:3000/
+react-kiosk-app > Client | http://localhost:3000/
 ```sh
 > npm start
 ```
 
-Server | http://localhost:3001/
+react-kiosk-app > Server | http://localhost:3001/
 ```sh
 > node index.js
 ```
 
-Nodemon 
+react-kiosk-app > Server #Nodemon 
 ```sh
 > npm run devStart
 ```
