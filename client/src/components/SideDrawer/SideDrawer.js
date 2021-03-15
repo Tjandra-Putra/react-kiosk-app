@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Badge, Container, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import Axios from 'axios';
 
 import * as actionTypes from '../../store/actions';
 import './SideDrawer.css';
@@ -29,6 +30,21 @@ const sideDrawer = (props) => {
 	});
 
 	props.calculateTotalPrice(totalAmount);
+
+	const submitOrderHandler = () => {
+		props.data.map((item) => {
+			Axios.post('http://localhost:3001/api/insert-customer-order', {
+				prod_name: item.prod_name,
+				prod_desc: item.prod_description,
+				prod_price: item.prod_price,
+				prod_quantity: item.prod_quantity,
+				table_id: props.tableId
+			}).then(() => {
+				alert('successful insert');
+			});
+		});
+		console.log('clicked');
+	};
 
 	if (props.data.length > 0) {
 		orders = (
@@ -80,7 +96,14 @@ const sideDrawer = (props) => {
 						</span>
 						${props.totalPrice.toFixed(2)}
 					</h5>
-					<Button variant="success" size="lg" block className="btn-order" style={{ width: '100%' }}>
+					<Button
+						variant="success"
+						size="lg"
+						block
+						className="btn-order"
+						style={{ width: '100%' }}
+						onClick={submitOrderHandler}
+					>
 						Order Now
 					</Button>
 				</div>
@@ -114,7 +137,8 @@ const sideDrawer = (props) => {
 const mapStateToProps = (global_state) => {
 	return {
 		data: global_state.selectedItems,
-		totalPrice: global_state.totalPrice
+		totalPrice: global_state.totalPrice,
+		tableId: global_state.tableId
 	};
 };
 

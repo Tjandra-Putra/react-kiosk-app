@@ -3,7 +3,8 @@ import * as actionTypes from './actions';
 // =========== GLOBAL STATE ===========
 const initialState = {
 	selectedItems: [], // contains a list of objects
-	totalPrice: 0
+	totalPrice: 0,
+	tableId: 5
 };
 
 const reducer = (state = initialState, action) => {
