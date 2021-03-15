@@ -6,7 +6,7 @@
 
 
 ### Installation
-Installing dependencies & Running
+Installing dependencies 
 ```sh
 > cd client
 > npm install
