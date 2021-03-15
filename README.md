@@ -1,3 +1,8 @@
+# React.js + Node.js + MySQL
+
+### Introduction
+This is a simple kiosk application for food & beverage industry demonstrating basic CRUD application. 
+
 ### Architecture
 | Type   | File           | 
 | ------------- |:-------------:
