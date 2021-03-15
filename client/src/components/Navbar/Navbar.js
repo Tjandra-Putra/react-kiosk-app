@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Navbar, Button, Form, Nav, FormControl, Badge } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Navbar, Button, Form, Nav, FormControl, Badge, Modal, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import Axios from 'axios';
 
 import './Navbar.css';
 import SideDrawer from '../SideDrawer/SideDrawer';
@@ -23,6 +24,27 @@ const navbar = (props) => {
 		backdrop = <Backdrop click={backdropClickHandler} />;
 	}
 
+	// Modal Summary
+	const [ show, setShow ] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
+	// Retrieving current order summary from database
+	const [ orders, setOrders ] = useState([]);
+
+	useEffect(() => {
+		Axios.get('http://localhost:3001/api/retrieve-current-order').then((response) => {
+			setOrders(response.data);
+		});
+	}, []);
+
+	// Total Price
+	let totalAmount = 0;
+	orders.map((item) => {
+		totalAmount += item.prod_price * item.prod_quantity;
+	});
+
 	return (
 		<React.Fragment>
 			<Navbar variant="light" className="navbar">
@@ -31,7 +53,10 @@ const navbar = (props) => {
 				</Form>
 				<Nav className="ml-auto">
 					<Button variant="light" className="d-inline ml-3 btn">
-						Call Waiters
+						Make Payment
+					</Button>
+					<Button variant="light" className="d-inline ml-3 btn" onClick={handleShow}>
+						Receipt
 					</Button>
 					<Button variant="light" className="d-inline ml-3 btn" onClick={drawerToggleClickHandler}>
 						Orders
@@ -43,6 +68,30 @@ const navbar = (props) => {
 			</Navbar>
 			<SideDrawer show={sideDrawerOpen} />
 			{backdrop}
+
+			<Modal show={show} onHide={handleClose} centered>
+				<Modal.Header closeButton>
+					<Modal.Title>Order Summary</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Table borderless hover size="sm">
+						<tbody>
+							{orders.map((val, index) => {
+								return (
+									<tr key={index}>
+										<td>{val.prod_name}</td>
+										<td>${val.prod_price}</td>
+										<td>x {val.prod_quantity}</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</Table>
+				</Modal.Body>
+				<Modal.Footer>
+					<h6 className="float-right">Total: ${totalAmount.toFixed(2)}</h6>
+				</Modal.Footer>
+			</Modal>
 		</React.Fragment>
 	);
 };

@@ -25,7 +25,7 @@ const product = (props) => {
 				</Card.Body>
 			</Card>
 
-			<Modal show={show} onHide={handleClose} centered className="text-center p-5 modal">
+			<Modal show={show} onHide={handleClose} centered className="text-center p-5 modal ">
 				<Card.Img
 					variant="top"
 					src={props.product.prod_image}
@@ -36,7 +36,7 @@ const product = (props) => {
 
 				<Modal.Body className="m-0 p-0 text-primary">$ {props.product.prod_price}</Modal.Body>
 
-				<Modal.Body className="mt-3 p-0">$ {props.product.prod_description}</Modal.Body>
+				<Modal.Body className="mt-3 p-0">{props.product.prod_desc}</Modal.Body>
 
 				<Modal.Footer className="border-0">
 					<Button

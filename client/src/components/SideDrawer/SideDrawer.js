@@ -32,10 +32,11 @@ const sideDrawer = (props) => {
 	props.calculateTotalPrice(totalAmount);
 
 	const submitOrderHandler = () => {
+		// Passing data to node.js
 		props.data.map((item) => {
 			Axios.post('http://localhost:3001/api/insert-customer-order', {
 				prod_name: item.prod_name,
-				prod_desc: item.prod_description,
+				prod_desc: item.prod_desc,
 				prod_price: item.prod_price,
 				prod_quantity: item.prod_quantity,
 				table_id: props.tableId
@@ -51,7 +52,7 @@ const sideDrawer = (props) => {
 			<div className="cart-items">
 				<Table borderless hover className="table-responsive-sm">
 					<tbody>
-						{props.data.map((item, index) => (
+						{props.data.map((item) => (
 							<tr>
 								<td>
 									<img src={item.prod_image} width="30" />

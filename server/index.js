@@ -19,6 +19,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // req means getting data from front-end
 // res means sending a response to server
 
+// ======== RETRIEVE ========
+app.get('/api/retrieve-current-order', (req, res) => {
+	const sqlSelect = 'SELECT * FROM cart_item';
+	db.query(sqlSelect, (err, result) => {
+		res.send(result);
+	});
+});
+
+app.get('/api/retrieve-product-listing', (req, res) => {
+	const sqlSelect = 'SELECT * FROM products';
+	db.query(sqlSelect, (err, result) => {
+		res.send(result);
+	});
+});
+
+// ======== INSERT ========
 app.post('/api/insert-customer-order', (req, res) => {
 	// Getting data from front end
 	const prod_name = req.body.prod_name;
