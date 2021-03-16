@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actionTypes from '../../../store/actions';
 import './Product.css';
+import productImage from '../../../assets/image/bun.png';
 
 const product = (props) => {
 	const [ show, setShow ] = useState(false);
@@ -11,12 +12,16 @@ const product = (props) => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
+	// For dynamic images
+	const images = require.context('../../../assets/image', true);
+
 	return (
 		<React.Fragment>
 			<Card className="text-center my-3 card" onClick={handleShow}>
 				<Card.Img
 					variant="top"
-					src={props.product.prod_image}
+					src={images(`./${props.product.prod_image}`)}
+					alt={props.product.prod_image}
 					style={{ width: '5rem' }}
 					className="mx-auto pt-4"
 				/>
@@ -28,7 +33,7 @@ const product = (props) => {
 			<Modal show={show} onHide={handleClose} centered className="text-center p-5 modal ">
 				<Card.Img
 					variant="top"
-					src={props.product.prod_image}
+					src={images(`./${props.product.prod_image}`)}
 					style={{ width: '10rem' }}
 					className="mx-auto pt-4"
 				/>
@@ -40,7 +45,7 @@ const product = (props) => {
 
 				<Modal.Footer className="border-0">
 					<Button
-						variant="primary mb-3 mt-3"
+						variant="secondary mb-3 mt-3"
 						onClick={() => {
 							props.addToCart(props.product);
 							handleClose();

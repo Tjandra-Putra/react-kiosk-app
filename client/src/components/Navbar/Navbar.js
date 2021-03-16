@@ -6,6 +6,7 @@ import Axios from 'axios';
 import './Navbar.css';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import Backdrop from '../Backdrop/Backdrop';
+import * as actionTypes from '../../store/actions';
 
 const navbar = (props) => {
 	const [ sideDrawerOpen, setSideDrawer ] = useState(false);
@@ -39,6 +40,18 @@ const navbar = (props) => {
 		});
 	}, []);
 
+	let currentOrder = () => {
+		orders.map((val, index) => {
+			return (
+				<tr key={index}>
+					<td>{val.prod_name}</td>
+					<td>${val.prod_price}</td>
+					<td>x {val.prod_quantity}</td>
+				</tr>
+			);
+		});
+	};
+
 	// Total Price
 	let totalAmount = 0;
 	orders.map((item) => {
@@ -49,7 +62,14 @@ const navbar = (props) => {
 		<React.Fragment>
 			<Navbar variant="light" className="navbar">
 				<Form inline>
-					<FormControl type="text" placeholder="Search" style={{ width: '60em' }} className="input-search" />
+					<FormControl
+						type="text"
+						placeholder="Search"
+						style={{ width: '60em' }}
+						className="input-search"
+						onChange={props.onSearchHandler}
+						value={props.searchInputValue}
+					/>
 				</Form>
 				<Nav className="ml-auto">
 					<Button variant="light" className="d-inline ml-3 btn">
@@ -99,8 +119,16 @@ const navbar = (props) => {
 // STORE
 const mapStateToProps = (global_state) => {
 	return {
-		data: global_state.selectedItems
+		data: global_state.selectedItems,
+		searchInputValue: global_state.searchInputValue
 	};
 };
 
-export default connect(mapStateToProps)(navbar);
+// ACTION
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onSearchHandler: (event) => dispatch({ type: actionTypes.SEARCH_PRODUCT_LISTING, event: event })
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(navbar);

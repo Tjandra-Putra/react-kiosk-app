@@ -4,7 +4,10 @@ import * as actionTypes from './actions';
 const initialState = {
 	selectedItems: [], // contains a list of objects
 	totalPrice: 0,
-	tableId: 5
+	tableId: 5,
+	cartId: 1,
+	searchInputValue: '',
+	products: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -103,6 +106,20 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				totalPrice: action.total_price
+			};
+		}
+
+		case actionTypes.SEARCH_PRODUCT_LISTING: {
+			return {
+				...state,
+				searchInputValue: action.event.target.value
+			};
+		}
+
+		case actionTypes.ALL_PRODUCT_LISTING: {
+			return {
+				...state,
+				products: action.products
 			};
 		}
 	}

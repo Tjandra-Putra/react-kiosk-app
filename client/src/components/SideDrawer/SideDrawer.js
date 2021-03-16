@@ -13,6 +13,8 @@ const sideDrawer = (props) => {
 		drawerClasses = 'side-drawer open';
 	}
 
+	const [ btnOrderText, setBtnOrderText ] = useState('Order Now');
+
 	let orders = (
 		<Container>
 			<img src={img_cart} className="img-fluid" />
@@ -29,6 +31,10 @@ const sideDrawer = (props) => {
 		totalAmount += item.prod_price * item.prod_quantity;
 	});
 
+	// For dynamic images
+	const images = require.context('../../assets/image', true);
+
+	// Passing current state to global state
 	props.calculateTotalPrice(totalAmount);
 
 	const submitOrderHandler = () => {
@@ -39,11 +45,14 @@ const sideDrawer = (props) => {
 				prod_desc: item.prod_desc,
 				prod_price: item.prod_price,
 				prod_quantity: item.prod_quantity,
-				table_id: props.tableId
+				table_id: props.tableId,
+				cartId: props.cartId
 			}).then(() => {
 				alert('successful insert');
 			});
 		});
+
+		setBtnOrderText('Ordered!');
 		console.log('clicked');
 	};
 
@@ -55,7 +64,7 @@ const sideDrawer = (props) => {
 						{props.data.map((item) => (
 							<tr>
 								<td>
-									<img src={item.prod_image} width="30" />
+									<img src={images(`./${item.prod_image}`)} width="30" />
 								</td>
 								<td>
 									{item.prod_name} <br />
@@ -105,7 +114,7 @@ const sideDrawer = (props) => {
 						style={{ width: '100%' }}
 						onClick={submitOrderHandler}
 					>
-						Order Now
+						{btnOrderText}
 					</Button>
 				</div>
 			</div>
@@ -139,7 +148,8 @@ const mapStateToProps = (global_state) => {
 	return {
 		data: global_state.selectedItems,
 		totalPrice: global_state.totalPrice,
-		tableId: global_state.tableId
+		tableId: global_state.tableId,
+		cartId: global_state.cartId
 	};
 };
 
