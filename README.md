@@ -14,14 +14,14 @@ This is a simple kiosk application for food & beverage industry demonstrating ba
 Installing dependencies 
 ```sh
 > cd client
-> npm install
+> npm install --save
 ```
 ```sh
 > cd ..
 ```
 ```sh
 > cd server
-> npm install
+> npm install --save
 ```
 
 ### Running the application
